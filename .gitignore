@@ -1,0 +1,16 @@
+# Dépendances
+node_modules/
+
+# Build client
+client/dist/
+
+# Base de données SQLite (Railway utilise son propre volume)
+server/data/
+
+# Variables d'environnement (secrets)
+.env
+server/.env
+
+# Système
+.DS_Store
+*.log
