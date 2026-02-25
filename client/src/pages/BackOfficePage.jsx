@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { getBrands, createBrand, updateBrand, deleteBrand } from '../api/client';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { getBrands, createBrand, updateBrand, deleteBrand, uploadImage } from '../api/client';
 
 const PASSWORD = '123456';
 
@@ -114,6 +114,22 @@ function PasswordGate({ onAuth }) {
 function CardForm({ initial, onSave, onCancel }) {
   const [form, setForm] = useState(initial || EMPTY_FORM);
   const [errors, setErrors] = useState({});
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef(null);
+
+  async function handleFileChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const { url } = await uploadImage(file);
+      setForm((f) => ({ ...f, photo: url }));
+    } catch {
+      // silently ignore upload error
+    } finally {
+      setUploading(false);
+    }
+  }
 
   function set(field, value) {
     setForm((f) => ({ ...f, [field]: value }));
@@ -203,15 +219,52 @@ function CardForm({ initial, onSave, onCancel }) {
         </div>
 
         <div>
-          <Label>Photo (URL)</Label>
+          <Label>Image de la carte</Label>
           <input
-            type="text" placeholder="https://…/image.jpg" value={form.photo || ''}
-            onChange={(e) => set('photo', e.target.value)}
-            style={inputStyle(false)}
-            onFocus={(e) => { e.target.style.borderColor = 'rgba(168,85,247,0.6)'; }}
-            onBlur={(e) => { e.target.style.borderColor = 'rgba(168,85,247,0.25)'; }}
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
           />
-          <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.2)' }}>Laissez vide pour utiliser la couleur primaire</p>
+          <div className="flex items-center gap-3">
+            {/* Preview */}
+            <div
+              className="w-16 h-16 rounded-xl flex-shrink-0 overflow-hidden flex items-center justify-center border border-white/10"
+              style={{ background: form.photo ? undefined : form.color }}
+            >
+              {form.photo
+                ? <img src={form.photo} alt="" className="w-full h-full object-cover" />
+                : <span className="text-white font-bold text-lg">{form.title?.[0] || '?'}</span>
+              }
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:opacity-90 flex items-center gap-2"
+                style={{ background: 'rgba(168,85,247,0.15)', color: '#c084fc', border: '1px solid rgba(168,85,247,0.3)' }}
+              >
+                {uploading ? (
+                  <><div className="w-3.5 h-3.5 rounded-full border-2 animate-spin" style={{ borderColor: 'rgba(192,132,252,0.3)', borderTopColor: '#c084fc' }} /> Envoi…</>
+                ) : (
+                  <><svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg> Choisir une image</>
+                )}
+              </button>
+              {form.photo && (
+                <button
+                  type="button"
+                  onClick={() => set('photo', '')}
+                  className="text-xs text-left transition-all hover:opacity-80"
+                  style={{ color: 'rgba(239,68,68,0.7)' }}
+                >
+                  Supprimer l'image
+                </button>
+              )}
+            </div>
+          </div>
+          <p className="text-xs mt-2" style={{ color: 'rgba(255,255,255,0.2)' }}>Sans image, la couleur primaire est utilisée</p>
         </div>
       </div>
 

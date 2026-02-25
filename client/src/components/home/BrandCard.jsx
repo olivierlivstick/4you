@@ -20,21 +20,31 @@ export default function BrandCard({ brand }) {
         className="h-28 flex items-center justify-center relative overflow-hidden"
         style={{ backgroundColor: brand.color }}
       >
-        <span
-          className="text-white font-bold text-3xl tracking-tight drop-shadow-sm"
-          style={{ textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}
-        >
-          {brand.name}
-        </span>
-        {/* Decorative circles */}
-        <div
-          className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full opacity-20"
-          style={{ backgroundColor: 'white' }}
-        />
-        <div
-          className="absolute -top-4 -left-4 w-12 h-12 rounded-full opacity-10"
-          style={{ backgroundColor: 'white' }}
-        />
+        {brand.photo ? (
+          <img
+            src={brand.photo}
+            alt={brand.name}
+            className="h-full w-full object-contain p-2"
+          />
+        ) : (
+          <>
+            <span
+              className="text-white font-bold text-3xl tracking-tight drop-shadow-sm"
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}
+            >
+              {brand.name}
+            </span>
+            {/* Decorative circles */}
+            <div
+              className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full opacity-20"
+              style={{ backgroundColor: 'white' }}
+            />
+            <div
+              className="absolute -top-4 -left-4 w-12 h-12 rounded-full opacity-10"
+              style={{ backgroundColor: 'white' }}
+            />
+          </>
+        )}
       </div>
 
       {/* Content */}

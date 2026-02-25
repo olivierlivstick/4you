@@ -13,6 +13,7 @@ import brandsRouter from './routes/brands.js';
 import ordersRouter from './routes/orders.js';
 import voucherRouter from './routes/voucher.js';
 import qrRouter from './routes/qr.js';
+import uploadRouter from './routes/upload.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -28,11 +29,15 @@ if (!IS_PROD) {
 }
 app.use(express.json());
 
+// ── Uploaded images (dev + prod) ──────────────────────────
+app.use('/uploads', express.static(path.join(__dirname, 'data', 'uploads')));
+
 // ── API routes ─────────────────────────────────────────────
 app.use('/api/brands', brandsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/voucher', voucherRouter);
 app.use('/api/qr', qrRouter);
+app.use('/api/upload', uploadRouter);
 
 // ── Production: serve React build ─────────────────────────
 if (IS_PROD) {

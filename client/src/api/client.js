@@ -42,3 +42,9 @@ export const updateBrand = (id, body) =>
 
 export const deleteBrand = (id) =>
   fetch(`${BASE}/api/brands/${id}`, { method: 'DELETE' }).then(handleResponse);
+
+export const uploadImage = (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+  return fetch(`${BASE}/api/upload`, { method: 'POST', body: formData }).then(handleResponse);
+};
