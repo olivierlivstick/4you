@@ -10,63 +10,62 @@ const MAX_MSG = 200;
 
 function darkFieldClass(hasError) {
   return [
-    'w-full px-4 py-3 rounded-xl text-sm transition-all',
-    'focus:outline-none focus:ring-2 focus:ring-purple-500/50',
+    'w-full px-4 py-3 rounded-xl text-sm transition-all text-slate-800 placeholder-slate-400 bg-white shadow-sm',
+    'focus:outline-none focus:ring-2 focus:ring-primary-500/50',
     hasError
-      ? 'border border-red-500/40 bg-red-900/20 text-white'
-      : 'border border-purple-500/20 bg-black/30 text-white',
+      ? 'border-2 border-red-400 focus:border-red-500'
+      : 'border border-slate-200 hover:border-primary-300 focus:border-primary-500',
   ].join(' ');
 }
 
 function StepCard({ index, title, enabled, completed, summary, onEdit, children, brand }) {
   return (
     <div
-      className="rounded-2xl overflow-hidden transition-all duration-300 h-full flex flex-col"
+      className="rounded-3xl overflow-hidden transition-all duration-300 h-full flex flex-col"
       style={
         enabled
           ? {
-              background: 'linear-gradient(145deg, #1E1B4B 0%, #2D1B69 100%)',
-              border: '1px solid rgba(168,85,247,0.3)',
-              boxShadow: '0 0 0 1px rgba(168,85,247,0.08), 0 8px 32px rgba(0,0,0,0.35)',
-            }
-          : { background: '#13112a', border: '1px solid rgba(255,255,255,0.05)' }
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(12px)',
+            border: `1px solid ${brand.color}30`,
+            boxShadow: `0 10px 40px -10px ${brand.color}20`,
+          }
+          : { background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0,0,0,0.05)' }
       }
     >
-      <div className="flex items-center justify-between px-6 py-4" style={{ opacity: enabled ? 1 : 0.3 }}>
+      <div className="flex items-center justify-between px-6 py-5" style={{ opacity: enabled ? 1 : 0.4 }}>
         <div className="flex items-center gap-3 min-w-0">
           <div
-            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-sm"
             style={
               completed
-                ? { background: 'linear-gradient(135deg, #6C3AED, #EC4899)', color: 'white' }
+                ? { background: `linear-gradient(135deg, ${brand.color}, #EC4899)`, color: 'white' }
                 : enabled
-                ? { background: brand.color, color: 'white' }
-                : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)' }
+                  ? { background: brand.color, color: 'white' }
+                  : { background: '#e2e8f0', color: '#94a3b8' }
             }
           >
             {completed ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             ) : (
               index + 1
             )}
           </div>
-          <span className="font-semibold text-base truncate" style={{ color: enabled ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.25)' }}>
+          <span className="font-bold text-lg truncate" style={{ color: enabled ? '#1e293b' : '#94a3b8' }}>
             {title}
           </span>
           {completed && summary && (
-            <span className="text-xs font-medium truncate hidden sm:inline" style={{ color: brand.color }}>
+            <span className="text-sm font-semibold truncate hidden sm:inline" style={{ color: brand.color }}>
               — {summary}
             </span>
           )}
         </div>
         {completed && onEdit && (
           <button
-            className="text-xs underline transition-colors flex-shrink-0 ml-2"
-            style={{ color: 'rgba(168,85,247,0.7)' }}
-            onMouseEnter={(e) => (e.target.style.color = 'rgba(244,114,182,0.9)')}
-            onMouseLeave={(e) => (e.target.style.color = 'rgba(168,85,247,0.7)')}
+            className="text-sm font-medium transition-colors flex-shrink-0 ml-2 hover:underline"
+            style={{ color: brand.color }}
             onClick={onEdit}
           >
             Modifier
@@ -75,7 +74,7 @@ function StepCard({ index, title, enabled, completed, summary, onEdit, children,
       </div>
 
       {enabled && (
-        <div className="px-6 pb-6 flex-1 flex flex-col" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="px-6 pb-6 flex-1 flex flex-col" style={{ borderTop: '1px solid rgba(0,0,0,0.05)' }}>
           <div className="pt-5 flex-1 flex flex-col">{children}</div>
         </div>
       )}
@@ -221,8 +220,8 @@ export default function PersonalizePage() {
     : null;
 
   return (
-    <div className="w-full min-h-screen px-6 py-8"
-      style={{ background: 'linear-gradient(160deg, #0F0C29 0%, #1a1545 40%, #1E1B4B 100%)' }}>
+    <div className="w-full min-h-screen px-4 py-8 sm:px-8 sm:py-12"
+      style={{ background: 'linear-gradient(160deg, #fdfbfb 0%, #ebedee 100%)' }}>
 
       {voucherData && (
         <VoucherModal
@@ -232,31 +231,30 @@ export default function PersonalizePage() {
       )}
 
       {/* Brand strip */}
-      <div className="relative flex items-center gap-4 px-6 py-4 rounded-2xl mb-8 overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #1E1B4B, #2D1B69)', border: '1px solid rgba(168,85,247,0.2)' }}>
-        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style={{ backgroundColor: brand.color }} />
+      <div className="relative flex items-center gap-5 px-6 py-5 rounded-3xl mb-8 overflow-hidden bg-white shadow-sm border border-slate-100 max-w-7xl mx-auto">
+        <div className="absolute left-0 top-0 bottom-0 w-2 rounded-l-3xl" style={{ backgroundColor: brand.color }} />
         <div className="absolute right-0 top-0 bottom-0 w-64 pointer-events-none"
-          style={{ background: `linear-gradient(to left, ${brand.color}18, transparent)` }} />
-        <div className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-white text-sm flex-shrink-0 relative z-10"
-          style={{ backgroundColor: brand.color, boxShadow: `0 4px 16px ${brand.color}60` }}>
+          style={{ background: `linear-gradient(to left, ${brand.color}10, transparent)` }} />
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-white text-xl flex-shrink-0 relative z-10 shadow-sm"
+          style={{ backgroundColor: brand.color }}>
           {brand.photo
-            ? <img src={brand.photo} alt={brand.name} className="w-full h-full object-contain rounded-xl p-1" />
+            ? <img src={brand.photo} alt={brand.name} className="w-full h-full object-contain rounded-2xl p-1" />
             : brand.name[0]}
         </div>
         <div className="relative z-10">
-          <p className="font-bold text-white">{brand.name}</p>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>{brand.category}</p>
+          <p className="font-extrabold text-slate-800 text-xl">{brand.name}</p>
+          <p className="text-sm font-medium text-slate-500">{brand.category}</p>
         </div>
-        <div className="ml-auto relative z-10">
-          <span className="text-xs font-medium px-3 py-1 rounded-full"
-            style={{ background: `${brand.color}25`, color: brand.color, border: `1px solid ${brand.color}40` }}>
-            Personnalisation
+        <div className="ml-auto relative z-10 hidden sm:block">
+          <span className="text-sm font-bold tracking-wide uppercase px-4 py-1.5 rounded-full"
+            style={{ background: `${brand.color}15`, color: brand.color }}>
+            Personnaliser ma carte
           </span>
         </div>
       </div>
 
       {/* Steps */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch max-w-7xl mx-auto">
 
         {/* ── Étape 1 : Votre commande ── */}
         <StepCard index={0} title="Votre commande" enabled={activeStep >= 0}
@@ -264,16 +262,16 @@ export default function PersonalizePage() {
           onEdit={() => { setStep0Done(null); setActiveStep(0); }} brand={brand}>
 
           {/* Montant */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-6">
             {PRESETS.map((v) => {
               const sel = selectedPreset === v && !customAmount;
               return (
                 <button key={v}
                   onClick={() => { setSelectedPreset(v); setCustomAmount(''); setStep0Errors((p) => ({ ...p, amount: '' })); }}
-                  className="px-4 py-2.5 rounded-xl font-semibold text-sm transition-all"
+                  className="px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all"
                   style={sel
                     ? { background: brand.color, color: 'white', boxShadow: `0 4px 14px ${brand.color}55`, border: `1px solid ${brand.color}` }
-                    : { background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.65)', border: '1px solid rgba(255,255,255,0.1)' }
+                    : { background: 'white', color: '#475569', border: '1px solid #e2e8f0' }
                   }>
                   {formatAmount(v)}
                 </button>
@@ -281,22 +279,24 @@ export default function PersonalizePage() {
             })}
           </div>
 
-          <div className="flex flex-col gap-1.5 mb-1">
-            <label className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>Ou saisir un montant libre</label>
+          <div className="flex flex-col gap-1.5 mb-2">
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Ou saisir un montant libre</label>
             <div className="relative">
               <input type="number" min={5} max={500} step={1} value={customAmount} placeholder="35"
                 onChange={(e) => { setCustomAmount(e.target.value); setSelectedPreset(null); setStep0Errors((p) => ({ ...p, amount: '' })); }}
                 className={darkFieldClass(false)}
-                style={customAmount ? { background: `${brand.color}18`, border: `1px solid ${brand.color}60`, color: 'white' } : {}} />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium" style={{ color: 'rgba(255,255,255,0.3)' }}>€</span>
+                style={customAmount ? { background: `${brand.color}08`, border: `1px solid ${brand.color}50`, color: '#1e293b' } : {}} />
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">€</span>
             </div>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>Entre 5 € et 500 €</p>
+            <p className="text-xs text-slate-400">Entre 5 € et 500 €</p>
           </div>
-          {step0Errors.amount && <p className="text-xs mb-2" style={{ color: '#f87171' }}>{step0Errors.amount}</p>}
+          {step0Errors.amount && <p className="text-xs mb-4 text-red-500 font-medium">{step0Errors.amount}</p>}
+
+          <div className="w-full h-px bg-slate-100 my-6" />
 
           {/* Vous */}
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Vous</p>
-          <div className="grid grid-cols-2 gap-3 mb-5">
+          <p className="text-xs font-bold uppercase tracking-widest mb-3 text-slate-400">Vous</p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
             <DarkField label="Votre prénom *" error={step0Errors.senderName}>
               <input type="text" placeholder="Jean" value={senderName}
                 onChange={(e) => { setSenderName(e.target.value); setStep0Errors((p) => ({ ...p, senderName: '' })); }}
@@ -310,15 +310,15 @@ export default function PersonalizePage() {
           </div>
 
           {/* Destinataire */}
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Le destinataire de votre carte</p>
-          <div className="flex flex-col gap-3.5 mb-5">
+          <p className="text-xs font-bold uppercase tracking-widest mb-3 text-slate-400">Pour qui ?</p>
+          <div className="flex flex-col gap-4 mb-5">
             <div className="grid grid-cols-2 gap-3">
-              <DarkField label="Son prénom *" error={step0Errors.name}>
+              <DarkField label="Prénom *" error={step0Errors.name}>
                 <input type="text" placeholder="Marie" value={recipientName}
                   onChange={(e) => { setRecipientName(e.target.value); setStep0Errors((p) => ({ ...p, name: '' })); }}
                   className={darkFieldClass(step0Errors.name)} />
               </DarkField>
-              <DarkField label="Son email *" error={step0Errors.email}>
+              <DarkField label="Email *" error={step0Errors.email}>
                 <input type="email" placeholder="marie@exemple.fr" value={recipientEmail}
                   onChange={(e) => { setRecipientEmail(e.target.value); setStep0Errors((p) => ({ ...p, email: '' })); }}
                   className={darkFieldClass(step0Errors.email)} />
@@ -326,40 +326,40 @@ export default function PersonalizePage() {
             </div>
 
             <DarkField
-              label={<>Message personnel <span style={{ color: 'rgba(255,255,255,0.2)', fontWeight: 400 }}>(optionnel)</span></>}
+              label={<>Message personnel <span className="text-slate-400 font-normal">(optionnel)</span></>}
               error={step0Errors.message}>
               <textarea rows={2} placeholder="Joyeux anniversaire !" value={personalMessage}
                 onChange={(e) => { setPersonalMessage(e.target.value); setStep0Errors((p) => ({ ...p, message: '' })); }}
                 maxLength={MAX_MSG + 10}
                 className={`${darkFieldClass(step0Errors.message)} resize-none`} />
-              <span className="text-xs text-right mt-0.5"
-                style={{ color: personalMessage.length > MAX_MSG ? '#f87171' : 'rgba(255,255,255,0.2)' }}>
+              <span className="text-xs text-right mt-1 font-medium"
+                style={{ color: personalMessage.length > MAX_MSG ? '#ef4444' : '#94a3b8' }}>
                 {personalMessage.length}/{MAX_MSG}
               </span>
             </DarkField>
           </div>
 
-          <div className="mt-auto pt-4">
+          <div className="mt-auto pt-4 border-t border-slate-100 flex justify-end">
             <NextButton onClick={handleStep0Next} brand={brand}>Suivant</NextButton>
           </div>
         </StepCard>
 
         {/* ── Étape 2 : Message ── */}
         <div ref={step1Ref} className="h-full">
-          <StepCard index={1} title="Message" enabled={activeStep >= 1}
+          <StepCard index={1} title="L'Effet Waouh" enabled={activeStep >= 1}
             completed={step1Done !== null && activeStep > 1} summary={step1Summary}
             onEdit={() => { setStep1Done(null); setActiveStep(1); }} brand={brand}>
 
-            <label className="flex items-start gap-3 cursor-pointer p-3.5 rounded-xl transition-all mb-4"
+            <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl transition-all mb-6 group"
               style={{
-                background: hasVideo ? `${brand.color}15` : 'rgba(255,255,255,0.04)',
-                border: hasVideo ? `1px solid ${brand.color}40` : '1px solid rgba(255,255,255,0.08)',
+                background: hasVideo ? `${brand.color}10` : '#f8fafc',
+                border: hasVideo ? `1px solid ${brand.color}40` : '1px solid #e2e8f0',
               }}>
               <div className="relative mt-0.5 flex-shrink-0">
                 <input type="checkbox" className="sr-only" checked={hasVideo}
                   onChange={(e) => { setHasVideo(e.target.checked); if (!e.target.checked) setVideoRecorded(false); }} />
-                <div className="w-5 h-5 rounded flex items-center justify-center border-2 transition-all"
-                  style={hasVideo ? { backgroundColor: brand.color, borderColor: brand.color } : { borderColor: 'rgba(255,255,255,0.2)', backgroundColor: 'transparent' }}>
+                <div className="w-5 h-5 rounded flex items-center justify-center border-2 transition-all group-hover:border-slate-400"
+                  style={hasVideo ? { backgroundColor: brand.color, borderColor: brand.color } : { borderColor: '#cbd5e1', backgroundColor: 'white' }}>
                   {hasVideo && (
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -368,87 +368,85 @@ export default function PersonalizePage() {
                 </div>
               </div>
               <div>
-                <p className="font-semibold text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>Ajouter un message vidéo 🎥</p>
-                <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Accessible via QR code sur le voucher</p>
+                <p className="font-bold text-sm text-slate-800">Ajouter un message vidéo 🎥</p>
+                <p className="text-xs mt-1 text-slate-500 leading-relaxed">Surprenez le destinataire avec une vidéo qui s'animera à l'ouverture de sa carte.</p>
               </div>
             </label>
 
-            <div className="rounded-xl overflow-hidden mb-4 transition-opacity duration-300"
-              style={{ opacity: hasVideo ? 1 : 0.35, border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="aspect-video relative flex items-center justify-center" style={{ background: '#08070f' }}>
-                <div className="absolute inset-0 pointer-events-none"
+            <div className="rounded-2xl overflow-hidden mb-6 transition-all duration-300 shadow-sm"
+              style={{ opacity: hasVideo ? 1 : 0.4, border: '1px solid #e2e8f0' }}>
+              <div className="aspect-video relative flex items-center justify-center bg-slate-50">
+                <div className="absolute inset-0 pointer-events-none opacity-5"
                   style={{
-                    backgroundImage: 'linear-gradient(rgba(168,85,247,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.06) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
                     backgroundSize: '24px 24px',
                   }} />
 
                 {!hasVideo && (
-                  <div className="flex flex-col items-center gap-2 relative z-10" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="flex flex-col items-center gap-2 relative z-10 text-slate-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
-                    <span className="text-xs">Activez l'option ci-dessus</span>
+                    <span className="text-xs font-medium uppercase tracking-widest">Activez l'option</span>
                   </div>
                 )}
 
                 {hasVideo && !recording && !videoRecorded && (
                   <div className="flex flex-col items-center gap-3 relative z-10">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center"
-                      style={{ border: '2px dashed rgba(168,85,247,0.4)', background: 'rgba(168,85,247,0.08)' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: 'rgba(168,85,247,0.7)' }}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-white shadow-sm border-2 border-dashed border-slate-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Aperçu caméra</span>
+                    <span className="text-xs font-semibold text-slate-400">Aperçu caméra</span>
                   </div>
                 )}
 
                 {hasVideo && recording && (
                   <>
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded px-2 py-0.5 z-10" style={{ background: '#dc2626' }}>
+                    <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-md px-2 py-1 z-10 bg-red-500 shadow-sm">
                       <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                      <span className="text-white text-xs font-bold tracking-wide">REC</span>
+                      <span className="text-white text-[10px] font-bold tracking-wider">REC</span>
                     </div>
                     <div className="flex flex-col items-center gap-2 relative z-10">
-                      <span className="w-5 h-5 rounded-full animate-pulse" style={{ background: '#ef4444' }} />
-                      <span className="text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>Enregistrement en cours...</span>
+                      <span className="w-6 h-6 rounded-full bg-red-500 animate-pulse shadow-lg shadow-red-500/40" />
+                      <span className="text-sm font-medium text-slate-600">Enregistrement...</span>
                     </div>
                   </>
                 )}
 
                 {hasVideo && videoRecorded && !recording && (
                   <div className="flex flex-col items-center gap-2 relative z-10">
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center"
-                      style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: '#4ade80' }}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-green-50 border-2 border-green-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <span className="text-sm font-medium" style={{ color: '#4ade80' }}>Vidéo enregistrée</span>
+                    <span className="text-sm font-bold text-green-600">Vidéo prête !</span>
                   </div>
                 )}
               </div>
 
-              <div className="px-4 py-2.5 flex items-center justify-between" style={{ background: 'rgba(0,0,0,0.4)' }}>
-                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <div className="px-5 py-3 flex items-center justify-between bg-white border-t border-slate-100">
+                <span className="text-xs font-semibold text-slate-500">
                   {videoRecorded ? 'Durée : ~15s' : 'Durée max : 30s'}
                 </span>
                 <button
                   onClick={videoRecorded ? () => setVideoRecorded(false) : handleRecord}
                   disabled={recording || !hasVideo}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all hover:opacity-90 disabled:opacity-30"
-                  style={{ backgroundColor: videoRecorded ? '#374151' : brand.color }}>
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white transition-all shadow-sm disabled:opacity-30 disabled:shadow-none hover:-translate-y-0.5"
+                  style={{ backgroundColor: videoRecorded ? '#475569' : brand.color }}>
                   {recording ? 'En cours...' : videoRecorded ? 'Refaire' : 'Enregistrer'}
                 </button>
               </div>
             </div>
 
-            <p className="text-sm mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              Vous pourrez également enregistrer votre message plus tard si vous le souhaitez ou modifier celui que vous venez d'enregistrer.
+            <p className="text-sm text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+              💡 Vous pourrez également enregistrer votre message plus tard, ou le modifier après le paiement avant que la carte ne soit envoyée.
             </p>
 
-            <div className="mt-auto pt-4">
+            <div className="mt-auto pt-6 border-t border-slate-100 flex justify-end">
               <NextButton onClick={handleStep1Next} brand={brand}>Suivant</NextButton>
             </div>
           </StepCard>
@@ -456,31 +454,30 @@ export default function PersonalizePage() {
 
         {/* ── Étape 3 : Paiement ── */}
         <div ref={step2Ref} className="h-full">
-          <StepCard index={2} title="Paiement" enabled={activeStep >= 2} brand={brand}>
+          <StepCard index={2} title="Finalisation" enabled={activeStep >= 2} brand={brand}>
 
             {/* Mini récap */}
             {step0Done && (
-              <div className="rounded-xl px-4 py-3 mb-5"
-                style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Total</span>
-                  <span className="text-xl font-bold" style={{ color: brand.color }}>{formatAmount(step0Done.amount)}</span>
+              <div className="rounded-2xl px-5 py-4 mb-6 bg-slate-50 border border-slate-200">
+                <div className="flex items-center justify-between mb-2 pb-2 border-b border-slate-200">
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Total</span>
+                  <span className="text-2xl font-black" style={{ color: brand.color }}>{formatAmount(step0Done.amount)}</span>
                 </div>
-                <div className="flex items-center justify-between mt-1">
-                  <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Pour</span>
-                  <span className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.65)' }}>{step0Done.name} · {step0Done.email}</span>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs font-semibold text-slate-500">Destinataire</span>
+                  <span className="text-sm font-bold text-slate-700">{step0Done.name}</span>
                 </div>
                 {step1Done?.hasVideoMessage && (
-                  <div className="flex items-center justify-between mt-1">
-                    <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>Message</span>
-                    <span className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.65)' }}>🎥 Vidéo incluse</span>
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-xs font-semibold text-slate-500">Bonus</span>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded text-white" style={{ background: brand.color }}>🎥 Vidéo incluse</span>
                   </div>
                 )}
               </div>
             )}
 
             {/* Formulaire carte */}
-            <div className="flex flex-col gap-3.5 mb-5">
+            <div className="flex flex-col gap-4 mb-6">
               <DarkField label="Nom sur la carte *" error={cardErrors.cardName}>
                 <input type="text" placeholder="Jean Dupont" value={cardName}
                   onChange={(e) => { setCardName(e.target.value); setCardErrors((p) => ({ ...p, cardName: '' })); }}
@@ -493,9 +490,9 @@ export default function PersonalizePage() {
                     onChange={(e) => { setCardNumber(formatCardNumber(e.target.value)); setCardErrors((p) => ({ ...p, cardNumber: '' })); }}
                     className={darkFieldClass(cardErrors.cardNumber)}
                     inputMode="numeric" maxLength={19} />
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 opacity-40">
-                    <div className="w-7 h-5 rounded" style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }} />
-                    <div className="w-7 h-5 rounded" style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)' }} />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 opacity-70">
+                    <div className="w-7 h-5 rounded shadow-sm" style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }} />
+                    <div className="w-7 h-5 rounded shadow-sm" style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)' }} />
                   </div>
                 </div>
               </DarkField>
@@ -513,7 +510,7 @@ export default function PersonalizePage() {
                       onChange={(e) => { setCardCvv(e.target.value.replace(/\D/g, '').slice(0, 4)); setCardErrors((p) => ({ ...p, cardCvv: '' })); }}
                       className={darkFieldClass(cardErrors.cardCvv)}
                       inputMode="numeric" maxLength={4} />
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 opacity-25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -521,36 +518,35 @@ export default function PersonalizePage() {
               </div>
             </div>
 
-            <div className="mt-auto pt-2">
-            {payError && (
-              <div className="mb-4 px-4 py-3 rounded-xl text-sm"
-                style={{ background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.3)', color: '#fca5a5' }}>
-                {payError}
-              </div>
-            )}
-
-            <button
-              onClick={handlePay}
-              disabled={paying || !step0Done || !step1Done}
-              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-bold text-sm text-white transition-all active:scale-95 disabled:opacity-40"
-              style={{
-                background: paying ? brand.color : `linear-gradient(135deg, ${brand.color} 0%, #EC4899 100%)`,
-                boxShadow: paying ? 'none' : `0 6px 20px ${brand.color}45`,
-              }}>
-              {paying ? (
-                <><span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />Traitement...</>
-              ) : (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                  Payer {step0Done ? formatAmount(step0Done.amount) : ''}
-                </>
+            <div className="mt-auto pt-4 border-t border-slate-100">
+              {payError && (
+                <div className="mb-4 px-4 py-3 rounded-xl text-sm font-semibold bg-red-50 text-red-600 border border-red-200 shadow-sm">
+                  {payError}
+                </div>
               )}
-            </button>
-            <p className="text-center text-xs mt-3" style={{ color: 'rgba(255,255,255,0.2)' }}>
-              Site de démonstration — aucun paiement réel effectué
-            </p>
+
+              <button
+                onClick={handlePay}
+                disabled={paying || !step0Done || !step1Done}
+                className="w-full flex items-center justify-center gap-2.5 py-4 rounded-2xl font-extrabold text-base text-white transition-all hover:opacity-90 active:scale-95 disabled:opacity-40"
+                style={{
+                  background: paying ? brand.color : `linear-gradient(135deg, ${brand.color} 0%, #EC4899 100%)`,
+                  boxShadow: paying ? 'none' : `0 10px 30px -5px ${brand.color}60`,
+                }}>
+                {paying ? (
+                  <><span className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />Validation...</>
+                ) : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Payer {step0Done ? formatAmount(step0Done.amount) : ''}
+                  </>
+                )}
+              </button>
+              <p className="text-center text-xs mt-4 text-slate-400 font-medium">
+                Site de démonstration — aucun prélèvement
+              </p>
             </div>
           </StepCard>
         </div>
@@ -576,9 +572,9 @@ function NextButton({ children, onClick, brand }) {
 function DarkField({ label, error, children }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>{label}</label>
+      <label className="text-xs font-bold text-slate-600 uppercase tracking-widest">{label}</label>
       {children}
-      {error && <p className="text-xs" style={{ color: '#f87171' }}>{error}</p>}
+      {error && <p className="text-xs text-red-500 font-medium">{error}</p>}
     </div>
   );
 }

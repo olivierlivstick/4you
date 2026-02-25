@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Logo from '../ui/Logo';
 
 const NAV = [
   { to: '/', label: 'Démonstration', exact: true },
@@ -8,80 +9,41 @@ const NAV = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full" style={{ background: '#0F0C29' }}>
-      {/* Gradient accent line */}
-      <div
-        className="h-0.5 w-full"
-        style={{ background: 'linear-gradient(90deg, #6C3AED 0%, #A855F7 45%, #F472B6 75%, #EC4899 100%)' }}
-      />
-      <div className="w-full px-8 h-14 flex items-center justify-between">
-        {/* Text wordmark — logo SVG is featured large in the hero */}
-        <NavLink to="/" className="no-underline flex items-center gap-0.5 select-none">
-          <span
-            className="font-black text-2xl leading-none"
-            style={{
-              background: 'linear-gradient(135deg, #A855F7 0%, #F472B6 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontFamily: "'Georgia', 'Times New Roman', serif",
-            }}
-          >
-            4
-          </span>
-          <span
-            className="font-light text-2xl leading-none tracking-tight"
-            style={{ color: 'rgba(255,255,255,0.85)', fontFamily: "'Georgia', 'Times New Roman', serif" }}
-          >
-            you
-          </span>
+    <header className="sticky top-0 z-50 w-full glass">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+        <NavLink to="/" className="no-underline transition-transform hover:scale-105 active:scale-95">
+          <Logo />
         </NavLink>
 
-        <nav className="flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1">
           {NAV.map(({ to, label, exact }) => (
             <NavLink
               key={to}
               to={to}
               end={exact}
-              className="px-4 py-2 rounded-full text-sm transition-all no-underline"
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      background: 'linear-gradient(135deg, rgba(108,58,237,0.55), rgba(244,114,182,0.35))',
-                      color: 'rgba(255,255,255,0.95)',
-                      fontWeight: 600,
-                      border: '1px solid rgba(168,85,247,0.35)',
-                    }
-                  : {
-                      color: 'rgba(255,255,255,0.45)',
-                      fontWeight: 400,
-                      border: '1px solid transparent',
-                    }
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
+                  ? 'bg-primary-50 text-primary-600 shadow-sm'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                }`
               }
-              onMouseEnter={(e) => { if (!e.currentTarget.dataset.active) e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
-              onMouseLeave={(e) => { if (!e.currentTarget.dataset.active) e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; }}
             >
               {label}
             </NavLink>
           ))}
 
-          {/* Separator */}
-          <div className="w-px h-4 mx-1" style={{ background: 'rgba(255,255,255,0.1)' }} />
+          <div className="w-px h-5 mx-2 bg-slate-200" />
 
           {/* Back office link */}
           <NavLink
             to="/backoffice"
-            className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs transition-all no-underline"
-            style={({ isActive }) =>
-              isActive
-                ? { background: 'linear-gradient(135deg, rgba(108,58,237,0.55), rgba(244,114,182,0.35))', color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(168,85,247,0.35)', fontWeight: 600 }
-                : { color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.1)', fontWeight: 400 }
+            className={({ isActive }) =>
+              `flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
+                ? 'bg-secondary-50 text-secondary-600 shadow-sm'
+                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+              }`
             }
-            onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" style={{ width: 12, height: 12 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
             Admin
           </NavLink>
         </nav>

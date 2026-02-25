@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getBrands } from '../api/client';
 import BrandCard from '../components/home/BrandCard';
+import { Zap, Video, FileText, Heart, Gift } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
   const [brands, setBrands] = useState([]);
@@ -15,94 +17,145 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section
-        className="relative w-full overflow-hidden"
-        style={{ background: 'linear-gradient(145deg, #0F0C29 0%, #1E1B4B 40%, #2D1B69 70%, #6C3AED 100%)' }}
-      >
-        {/* Decorative orbs */}
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 pt-16 pb-24 sm:pt-24 sm:pb-32">
+        {/* Decorative Orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute -top-16 -right-16 w-72 h-72 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.22) 0%, transparent 70%)' }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-primary-200/40 blur-3xl mix-blend-multiply"
           />
-          <div
-            className="absolute -bottom-12 -left-12 w-56 h-56 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(236,72,153,0.18) 0%, transparent 70%)' }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+            className="absolute top-40 -left-20 w-80 h-80 rounded-full bg-secondary-200/40 blur-3xl mix-blend-multiply"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.4, ease: "easeOut" }}
+            className="absolute -bottom-20 left-1/2 w-80 h-80 rounded-full bg-accent-200/30 blur-3xl mix-blend-multiply"
           />
         </div>
 
-        {/* Subtle dot grid */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(168,85,247,0.15) 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
-          }}
-        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 text-center flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-8 text-primary-700 font-medium text-sm"
+          >
+            <Heart size={16} className="text-primary-500" fill="currentColor" />
+            <span>La nouvelle façon d'offrir</span>
+          </motion.div>
 
-        {/* Content — horizontal layout */}
-        <div className="relative z-10 w-full px-8 py-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-          {/* Logo */}
-          <div className="flex-shrink-0" style={{ filter: 'drop-shadow(0 0 24px rgba(168,85,247,0.5))' }}>
-            <img src="/4you-logo.svg" alt="4you" style={{ height: '88px', width: 'auto' }} />
-          </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 tracking-tight leading-tight max-w-4xl"
+          >
+            Offrez bien plus qu'une carte,{' '}
+            <span className="block mt-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent pb-2">
+              offrez une émotion.
+            </span>
+          </motion.h1>
 
-          {/* Separator */}
-          <div className="hidden sm:block w-px self-stretch" style={{ background: 'rgba(168,85,247,0.3)' }} />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-6 text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed"
+          >
+            Des cartes cadeaux digitales pour vos enseignes préférées — enrichies par un message vidéo personnel pour un effet surprise garanti.
+          </motion.p>
 
-          {/* Text */}
-          <div className="flex flex-col gap-1.5">
-            <h1
-              className="font-bold text-white leading-tight"
-              style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', textShadow: '0 2px 30px rgba(108,58,237,0.4)' }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <a href="#brands" className="px-8 py-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold text-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group">
+              <Gift size={20} className="group-hover:rotate-12 transition-transform" />
+              Choisir une enseigne
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Feature strip ──────────────────────────────────── */}
+      <section className="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: Zap,
+              title: 'Immédiat & Facile',
+              desc: 'Livraison instantanée par email. Prêt à être offert en quelques clics.',
+              color: 'text-accent-500',
+              bg: 'bg-accent-50',
+              border: 'border-accent-100'
+            },
+            {
+              icon: Video,
+              title: 'L\'Effet Waouh',
+              desc: 'Enregistrez une vidéo personnelle qui s\'animera lors de l\'ouverture de la carte.',
+              color: 'text-primary-500',
+              bg: 'bg-primary-50',
+              border: 'border-primary-100'
+            },
+            {
+              icon: FileText,
+              title: 'Expérience Premium',
+              desc: 'Un design élégant, un QR code discret, et une attention inoubliable.',
+              color: 'text-secondary-500',
+              bg: 'bg-secondary-50',
+              border: 'border-secondary-100'
+            },
+          ].map((f, i) => (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 + (i * 0.1) }}
+              key={f.title}
+              className={`glass rounded-3xl p-8 transition-transform hover:-translate-y-1 duration-300`}
             >
-              Offrez la liberté{' '}
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, #C084FC 0%, #F472B6 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                du choix
-              </span>
-            </h1>
-            <p className="text-sm sm:text-base whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Des cartes cadeaux digitales pour vos enseignes préférées —{' '}
-              <span style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>
-                avec un message vidéo personnel en prime.
-              </span>
-            </p>
-          </div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${f.bg} ${f.color} border ${f.border} shadow-sm`}>
+                <f.icon size={28} strokeWidth={2} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">{f.title}</h3>
+              <p className="text-slate-600 leading-relaxed">
+                {f.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* ── Brand grid ─────────────────────────────────────── */}
-      <section className="w-full px-8 py-16" style={{ background: '#F5F3FF' }}>
-        {/* Section heading */}
-        <div className="mb-10">
-          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#A855F7' }}>
-            Enseignes disponibles
-          </p>
-          <h2 className="text-2xl font-bold" style={{ color: '#1E1B4B' }}>
-            Choisissez votre enseigne
+      <section id="brands" className="w-full px-4 sm:px-8 py-24 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">
+            Trouvez le cadeau parfait
           </h2>
-          <div
-            className="mt-3 h-1 w-14 rounded-full"
-            style={{ background: 'linear-gradient(90deg, #6C3AED, #EC4899)' }}
-          />
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+            Une sélection des meilleures enseignes pour combler toutes les envies.
+          </p>
         </div>
 
         {loading && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden animate-pulse shadow-sm">
-                <div className="h-28 bg-slate-100" />
-                <div className="p-4">
-                  <div className="h-4 bg-slate-100 rounded mb-2" />
-                  <div className="h-3 bg-slate-50 rounded w-3/4" />
+              <div key={i} className="bg-white rounded-3xl overflow-hidden animate-pulse shadow-sm border border-slate-100">
+                <div className="h-44 bg-slate-100" />
+                <div className="p-6">
+                  <div className="h-5 bg-slate-200 rounded w-1/2 mb-3" />
+                  <div className="h-4 bg-slate-100 rounded w-full mb-2" />
+                  <div className="h-4 bg-slate-100 rounded w-3/4" />
                 </div>
               </div>
             ))}
@@ -110,11 +163,10 @@ export default function HomePage() {
         )}
 
         {error && (
-          <div className="text-center py-16">
-            <p className="text-red-500 font-medium">{error}</p>
+          <div className="text-center py-20 bg-red-50 rounded-3xl border border-red-100">
+            <p className="text-red-600 font-medium text-lg mb-4">{error}</p>
             <button
-              className="mt-4 text-sm underline"
-              style={{ color: '#6C3AED' }}
+              className="px-6 py-2 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition-colors"
               onClick={() => window.location.reload()}
             >
               Réessayer
@@ -123,63 +175,24 @@ export default function HomePage() {
         )}
 
         {!loading && !error && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {brands.map((brand) => (
-              <BrandCard key={brand.id} brand={brand} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+            {brands.map((brand, i) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (i % 4) * 0.1 }}
+                key={brand.id}
+                className="h-full flex"
+              >
+                <div className="w-full flex">
+                  <BrandCard brand={brand} />
+                </div>
+              </motion.div>
             ))}
           </div>
         )}
       </section>
-
-      {/* ── Feature strip ──────────────────────────────────── */}
-      {!loading && !error && (
-        <section className="w-full px-8 pb-20" style={{ background: '#F5F3FF' }}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              {
-                icon: '⚡',
-                title: 'Instantané',
-                desc: 'Livraison immédiate par email. Le destinataire reçoit son voucher en quelques secondes.',
-                accent: '#A855F7',
-              },
-              {
-                icon: '🎥',
-                title: 'Message vidéo',
-                desc: 'Enregistrez un message vidéo personnel. Accessible via QR code sur le voucher.',
-                accent: '#EC4899',
-              },
-              {
-                icon: '📄',
-                title: 'Voucher PDF',
-                desc: 'Un document A4 élégant avec QR code intégré — imprimable ou partageable.',
-                accent: '#6C3AED',
-              },
-            ].map((f) => (
-              <div
-                key={f.title}
-                className="relative overflow-hidden rounded-2xl p-7"
-                style={{ background: 'linear-gradient(145deg, #1E1B4B 0%, #2D1B69 100%)' }}
-              >
-                {/* Orb accent */}
-                <div
-                  className="absolute -top-6 -right-6 w-28 h-28 rounded-full pointer-events-none"
-                  style={{ background: `radial-gradient(circle, ${f.accent}40 0%, transparent 70%)` }}
-                />
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-xl mb-5 relative z-10"
-                  style={{ background: `${f.accent}22`, border: `1px solid ${f.accent}40` }}
-                >
-                  {f.icon}
-                </div>
-                <p className="font-bold text-white text-base mb-2 relative z-10">{f.title}</p>
-                <p className="text-sm leading-relaxed relative z-10" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                  {f.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

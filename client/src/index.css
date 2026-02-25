@@ -1,18 +1,59 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-primary-50: #fff5f5;
+  --color-primary-100: #ffe3e3;
+  --color-primary-200: #ffc9c9;
+  --color-primary-300: #ffa8a8;
+  --color-primary-400: #ff7e7e;
+  --color-primary-500: #fa5252;
+  --color-primary-600: #e03131;
+  --color-primary-700: #c92a2a;
+  
+  --color-secondary-50: #fdf4ff;
+  --color-secondary-100: #fae8ff;
+  --color-secondary-200: #f5d0fe;
+  --color-secondary-300: #f0abfc;
+  --color-secondary-400: #e879f9;
+  --color-secondary-500: #d946ef;
+  --color-secondary-600: #c026d3;
+
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+
+  --font-sans: 'Outfit', system-ui, sans-serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+  
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --shadow-glow: 0 0 20px rgba(250, 82, 82, 0.4);
 }
 
-* {
-  box-sizing: border-box;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #fffafb; /* very soft warm white */
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(353,100%,96%,1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(288,100%,97%,1) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: #1e293b;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #f8fafc;
-  color: #1e293b;
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-soft;
+  }
 }
