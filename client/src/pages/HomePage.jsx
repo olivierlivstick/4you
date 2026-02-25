@@ -42,79 +42,104 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 text-center flex flex-col items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 lg:text-left text-center">
+          <div className="flex-1 flex flex-col items-center lg:items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-8 text-primary-700 font-medium text-sm"
+            >
+              <Heart size={16} className="text-primary-500" fill="currentColor" />
+              <span>La nouvelle façon d'offrir</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 tracking-tight leading-tight max-w-2xl"
+            >
+              Offrez bien plus qu'une carte,{' '}
+              <span className="block mt-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent pb-2 lg:pr-4">
+                offrez une émotion.
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed"
+            >
+              Des cartes cadeaux digitales pour vos enseignes préférées — enrichies par un message vidéo personnel, pour un effet de surprise incomparable.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
+              <a href="#brands" className="px-8 py-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold text-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group">
+                <Gift size={20} className="group-hover:rotate-12 transition-transform" />
+                Choisir une enseigne
+              </a>
+            </motion.div>
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-8 text-primary-700 font-medium text-sm"
+            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.3 }}
+            className="flex-1 w-full max-w-md lg:max-w-none relative mt-8 lg:mt-0"
           >
-            <Heart size={16} className="text-primary-500" fill="currentColor" />
-            <span>La nouvelle façon d'offrir</span>
-          </motion.div>
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[10px] border-white/60 glass hover:rotate-2 transition-transform duration-500">
+              <img src="/images/hero_lifestyle.png" alt="Femme heureuse recevant un cadeau" className="w-full h-auto object-cover aspect-[4/5]" />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 tracking-tight leading-tight max-w-4xl"
-          >
-            Offrez bien plus qu'une carte,{' '}
-            <span className="block mt-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent pb-2">
-              offrez une émotion.
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed"
-          >
-            Des cartes cadeaux digitales pour vos enseignes préférées — enrichies par un message vidéo personnel pour un effet surprise garanti.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a href="#brands" className="px-8 py-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold text-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group">
-              <Gift size={20} className="group-hover:rotate-12 transition-transform" />
-              Choisir une enseigne
-            </a>
+              {/* Floating badge */}
+              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/50 flex items-center gap-4 hover:scale-105 transition-transform cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-2xl shadow-inner border border-green-200">🎉</div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-slate-800 leading-tight mb-0.5">Cadeau ouvert !</p>
+                  <p className="text-xs text-slate-500 font-medium tracking-wide">il y a 2 min</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* ── Feature strip ──────────────────────────────────── */}
-      <section className="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-8 w-full">
+      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-10 md:-mt-10 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               icon: Zap,
-              title: 'Immédiat & Facile',
-              desc: 'Livraison instantanée par email. Prêt à être offert en quelques clics.',
+              title: 'Prêt à offrir',
+              desc: 'Livraison instantanée par email. Parfait pour les cadeaux de dernière minute.',
               color: 'text-accent-500',
               bg: 'bg-accent-50',
-              border: 'border-accent-100'
+              border: 'border-accent-200',
+              image: '/images/feature_instant.png'
             },
             {
               icon: Video,
-              title: 'L\'Effet Waouh',
-              desc: 'Enregistrez une vidéo personnelle qui s\'animera lors de l\'ouverture de la carte.',
+              title: 'L\'Effet Surprise',
+              desc: 'Ajoutez une émotion vraie grâce à un message vidéo personnel impossible à oublier.',
               color: 'text-primary-500',
               bg: 'bg-primary-50',
-              border: 'border-primary-100'
+              border: 'border-primary-200',
+              image: '/images/feature_emotion.png'
             },
             {
               icon: FileText,
-              title: 'Expérience Premium',
-              desc: 'Un design élégant, un QR code discret, et une attention inoubliable.',
+              title: 'Premium & Design',
+              desc: 'Un design soigné jusqu\'au QRCode numérique, pour la meilleure expérience.',
               color: 'text-secondary-500',
               bg: 'bg-secondary-50',
-              border: 'border-secondary-100'
+              border: 'border-secondary-200',
+              image: '/images/feature_premium.png'
             },
           ].map((f, i) => (
             <motion.div
@@ -122,15 +147,20 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 + (i * 0.1) }}
               key={f.title}
-              className={`glass rounded-3xl p-8 transition-transform hover:-translate-y-1 duration-300`}
+              className={`glass rounded-[2rem] overflow-hidden border border-white/40 shadow-xl transition-all hover:-translate-y-2 hover:shadow-2xl duration-500 group flex flex-col bg-white/80`}
             >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${f.bg} ${f.color} border ${f.border} shadow-sm`}>
-                <f.icon size={28} strokeWidth={2} />
+              <div className="w-full h-48 sm:h-56 relative overflow-hidden shrink-0">
+                <img src={f.image} alt={f.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className={`absolute bottom-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center ${f.bg} ${f.color} border-2 border-white shadow-md z-10`}>
+                  <f.icon size={24} strokeWidth={2.5} />
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">{f.title}</h3>
-              <p className="text-slate-600 leading-relaxed">
-                {f.desc}
-              </p>
+              <div className="p-6 sm:p-8 flex flex-col flex-1 bg-white">
+                <h3 className={`text-xl font-extrabold text-slate-800 mb-3 tracking-tight`}>{f.title}</h3>
+                <p className="text-slate-500 leading-relaxed font-medium text-sm sm:text-base">
+                  {f.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

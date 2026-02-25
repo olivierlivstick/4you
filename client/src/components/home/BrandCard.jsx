@@ -62,14 +62,17 @@ export default function BrandCard({ brand }) {
           {brand.description}
         </p>
 
-        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between transition-colors duration-300"
+        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between transition-colors duration-300 group-hover:border-slate-200"
           style={{ color: brand.color || '#334155' }}
         >
-          <span className="font-semibold text-sm">Offrir cette carte</span>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-50 group-hover:bg-primary-50 transition-colors duration-300"
-            style={{ color: brand.color }}
+          <span className="font-bold text-sm tracking-wide">Offrir cette carte</span>
+          <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-md"
+            style={{
+              backgroundColor: brand.color ? `${brand.color}15` : '#f1f5f9',
+              color: brand.color || '#475569'
+            }}
           >
-            <ChevronRight size={18} className="translate-x-0 group-hover:translate-x-0.5 transition-transform duration-300" />
+            <ChevronRight size={20} className="translate-x-0 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2.5} />
           </div>
         </div>
       </div>

@@ -383,22 +383,25 @@ export default function PersonalizePage() {
                   }} />
 
                 {!hasVideo && (
-                  <div className="flex flex-col items-center gap-2 relative z-10 text-slate-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    <span className="text-xs font-medium uppercase tracking-widest">Activez l'option</span>
+                  <div className="flex flex-col items-center gap-3 relative z-10 text-slate-400 group-hover:text-primary-500 transition-colors">
+                    <div className="w-16 h-16 rounded-[1.25rem] bg-white flex items-center justify-center shadow-sm border border-slate-100 group-hover:border-primary-100 group-hover:shadow-lg transition-all rotate-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-300 group-hover:text-primary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-slate-100/50">L'Effet Waouh</span>
                   </div>
                 )}
 
                 {hasVideo && !recording && !videoRecorded && (
                   <div className="flex flex-col items-center gap-3 relative z-10">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-white shadow-sm border-2 border-dashed border-slate-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <div className="w-20 h-20 rounded-[1.75rem] flex items-center justify-center bg-white shadow-xl shadow-primary-500/10 border border-primary-100 rotate-0 hover:rotate-3 transition-transform cursor-pointer group" onClick={handleRecord}>
+                      <div className="absolute inset-0 bg-primary-50 rounded-[1.75rem] scale-0 group-hover:scale-100 transition-transform origin-center" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-primary-500 relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
-                    <span className="text-xs font-semibold text-slate-400">Aperçu caméra</span>
+                    <span className="text-[10px] font-bold text-slate-500 tracking-wide uppercase bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-slate-100/50">Prêt à filmer</span>
                   </div>
                 )}
 
@@ -416,14 +419,13 @@ export default function PersonalizePage() {
                 )}
 
                 {hasVideo && videoRecorded && !recording && (
-                  <div className="flex flex-col items-center gap-2 relative z-10">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-green-50 border-2 border-green-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <div className="flex flex-col items-center gap-3 relative z-10">
+                    <div className="w-20 h-20 rounded-[1.75rem] flex items-center justify-center bg-green-50 shadow-xl shadow-green-500/10 border-2 border-green-200 hover:-rotate-3 transition-transform">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-sm font-bold text-green-600">Vidéo prête !</span>
+                    <span className="text-[11px] font-black text-green-600 tracking-wide uppercase bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-green-100">C'est dans la boîte !</span>
                   </div>
                 )}
               </div>
