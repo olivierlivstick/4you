@@ -14,6 +14,7 @@ import ordersRouter from './routes/orders.js';
 import voucherRouter from './routes/voucher.js';
 import qrRouter from './routes/qr.js';
 import uploadRouter from './routes/upload.js';
+import testLogsRouter from './routes/testLogs.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -38,6 +39,7 @@ app.use('/api/orders', ordersRouter);
 app.use('/api/voucher', voucherRouter);
 app.use('/api/qr', qrRouter);
 app.use('/api/upload', uploadRouter);
+app.use('/api/admin/test-logs', testLogsRouter);
 
 // ── Production: serve React build ─────────────────────────
 if (IS_PROD) {

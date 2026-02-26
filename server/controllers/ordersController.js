@@ -7,7 +7,7 @@ import { BASE_URL } from '../config/env.js';
 // POST /api/orders
 export function createOrder(req, res, next) {
   try {
-    const { brand_id, amount, sender_email, recipient_email, recipient_name, personal_message, has_video_message } = req.body;
+    const { brand_id, amount, sender_name, sender_lastname, sender_email, recipient_email, recipient_name, recipient_lastname, personal_message, has_video_message } = req.body;
 
     // Validation
     if (!brand_id || !amount || !sender_email || !recipient_email || !recipient_name) {
@@ -41,8 +41,8 @@ export function createOrder(req, res, next) {
 
     // Insert with collision-safe gift code
     const insertStmt = db.prepare(`
-      INSERT INTO orders (brand_id, amount, sender_email, recipient_email, recipient_name, personal_message, has_video_message, gift_code)
-      VALUES (@brand_id, @amount, @sender_email, @recipient_email, @recipient_name, @personal_message, @has_video_message, @gift_code)
+      INSERT INTO orders (brand_id, amount, sender_name, sender_lastname, sender_email, recipient_email, recipient_name, recipient_lastname, personal_message, has_video_message, gift_code)
+      VALUES (@brand_id, @amount, @sender_name, @sender_lastname, @sender_email, @recipient_email, @recipient_name, @recipient_lastname, @personal_message, @has_video_message, @gift_code)
     `);
 
     let giftCode, lastID;
@@ -53,9 +53,12 @@ export function createOrder(req, res, next) {
         const result = insertStmt.run({
           brand_id,
           amount: parsedAmount,
+          sender_name: (sender_name || '').trim(),
+          sender_lastname: (sender_lastname || '').trim(),
           sender_email: sender_email.trim(),
           recipient_email: recipient_email.trim(),
           recipient_name: recipient_name.trim(),
+          recipient_lastname: (recipient_lastname || '').trim(),
           personal_message: (personal_message || '').trim(),
           has_video_message: has_video_message ? 1 : 0,
           gift_code: giftCode,

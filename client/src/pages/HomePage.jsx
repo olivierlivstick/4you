@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getBrands } from '../api/client';
 import BrandCard from '../components/home/BrandCard';
 import { Zap, Video, FileText, Heart, Gift } from 'lucide-react';
@@ -8,6 +9,7 @@ export default function HomePage() {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     getBrands()
@@ -15,6 +17,36 @@ export default function HomePage() {
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, []);
+
+  const features = [
+    {
+      icon: Zap,
+      title: t('home.features.ready_title'),
+      desc: t('home.features.ready_desc'),
+      color: 'text-accent-500',
+      bg: 'bg-accent-50',
+      border: 'border-accent-200',
+      image: '/images/feature_instant.png'
+    },
+    {
+      icon: Video,
+      title: t('home.features.surprise_title'),
+      desc: t('home.features.surprise_desc'),
+      color: 'text-primary-500',
+      bg: 'bg-primary-50',
+      border: 'border-primary-200',
+      image: '/images/feature_emotion.png'
+    },
+    {
+      icon: FileText,
+      title: t('home.features.premium_title'),
+      desc: t('home.features.premium_desc'),
+      color: 'text-secondary-500',
+      bg: 'bg-secondary-50',
+      border: 'border-secondary-200',
+      image: '/images/feature_premium.png'
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -51,7 +83,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-8 text-primary-700 font-medium text-sm"
             >
               <Heart size={16} className="text-primary-500" fill="currentColor" />
-              <span>La nouvelle façon d'offrir</span>
+              <span>{t('home.badge')}</span>
             </motion.div>
 
             <motion.h1
@@ -60,9 +92,9 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 tracking-tight leading-tight max-w-2xl"
             >
-              Offrez bien plus qu'une carte,{' '}
+              {t('home.title_1')}{' '}
               <span className="block mt-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent pb-2 lg:pr-4">
-                offrez une émotion.
+                {t('home.title_2')}
               </span>
             </motion.h1>
 
@@ -72,7 +104,7 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-6 text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed"
             >
-              Des cartes cadeaux digitales pour vos enseignes préférées — enrichies par un message vidéo personnel, pour un effet de surprise incomparable.
+              {t('home.subtitle')}
             </motion.p>
 
             <motion.div
@@ -83,7 +115,7 @@ export default function HomePage() {
             >
               <a href="#brands" className="px-8 py-4 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold text-lg shadow-lg shadow-primary-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group">
                 <Gift size={20} className="group-hover:rotate-12 transition-transform" />
-                Choisir une enseigne
+                {t('home.cta')}
               </a>
             </motion.div>
           </div>
@@ -95,14 +127,14 @@ export default function HomePage() {
             className="flex-1 w-full max-w-md lg:max-w-none relative mt-8 lg:mt-0"
           >
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[10px] border-white/60 glass hover:rotate-2 transition-transform duration-500">
-              <img src="/images/hero_lifestyle.png" alt="Femme heureuse recevant un cadeau" className="w-full h-auto object-cover aspect-[4/5]" />
+              <img src="/images/hero_lifestyle.png" alt={t('home.hero_alt')} className="w-full h-auto object-cover aspect-[4/5]" />
 
               {/* Floating badge */}
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/50 flex items-center gap-4 hover:scale-105 transition-transform cursor-pointer">
                 <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-2xl shadow-inner border border-green-200">🎉</div>
                 <div className="text-left">
-                  <p className="text-sm font-bold text-slate-800 leading-tight mb-0.5">Cadeau ouvert !</p>
-                  <p className="text-xs text-slate-500 font-medium tracking-wide">il y a 2 min</p>
+                  <p className="text-sm font-bold text-slate-800 leading-tight mb-0.5">{t('home.floating_badge')}</p>
+                  <p className="text-xs text-slate-500 font-medium tracking-wide">{t('home.floating_time')}</p>
                 </div>
               </div>
             </div>
@@ -113,35 +145,7 @@ export default function HomePage() {
       {/* ── Feature strip ──────────────────────────────────── */}
       <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-10 md:-mt-10 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Zap,
-              title: 'Prêt à offrir',
-              desc: 'Livraison instantanée par email. Parfait pour les cadeaux de dernière minute.',
-              color: 'text-accent-500',
-              bg: 'bg-accent-50',
-              border: 'border-accent-200',
-              image: '/images/feature_instant.png'
-            },
-            {
-              icon: Video,
-              title: 'L\'Effet Surprise',
-              desc: 'Ajoutez une émotion vraie grâce à un message vidéo personnel impossible à oublier.',
-              color: 'text-primary-500',
-              bg: 'bg-primary-50',
-              border: 'border-primary-200',
-              image: '/images/feature_emotion.png'
-            },
-            {
-              icon: FileText,
-              title: 'Premium & Design',
-              desc: 'Un design soigné jusqu\'au QRCode numérique, pour la meilleure expérience.',
-              color: 'text-secondary-500',
-              bg: 'bg-secondary-50',
-              border: 'border-secondary-200',
-              image: '/images/feature_premium.png'
-            },
-          ].map((f, i) => (
+          {features.map((f, i) => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -170,10 +174,10 @@ export default function HomePage() {
       <section id="brands" className="w-full px-4 sm:px-8 py-24 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">
-            Trouvez le cadeau parfait
+            {t('home.catalog_title')}
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Une sélection des meilleures enseignes pour combler toutes les envies.
+            {t('home.catalog_subtitle')}
           </p>
         </div>
 
@@ -199,7 +203,7 @@ export default function HomePage() {
               className="px-6 py-2 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition-colors"
               onClick={() => window.location.reload()}
             >
-              Réessayer
+              {t('home.retry')}
             </button>
           </div>
         )}

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 function CodeBlock({ children }) {
   return (
     <pre className="bg-slate-900 text-slate-100 rounded-xl p-5 text-xs leading-relaxed overflow-x-auto">
@@ -32,27 +34,28 @@ function Endpoint({ method, path, description }) {
 }
 
 export default function TechPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       {/* Hero */}
       <div className="mb-14">
-        <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-4">Documentation technique</span>
+        <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-4">{t('tech.tag')}</span>
         <h1 className="text-4xl font-bold text-slate-900 leading-tight mb-5">
-          Intégrer la solution vidéo 4you
+          {t('tech.title')}
         </h1>
         <p className="text-lg text-slate-500 leading-relaxed">
-          4you expose une API REST simple pour créer des commandes, générer les vouchers PDF et héberger les messages vidéo associés.
-          Cette page décrit l'architecture et les points d'intégration clés.
+          {t('tech.intro')}
         </p>
       </div>
 
       {/* Architecture */}
-      <Section tag="Architecture" title="Vue d'ensemble">
+      <Section tag={t('tech.arch_tag')} title={t('tech.arch_title')}>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           {[
-            { icon: '⚛️', title: 'Frontend', body: 'React 19 + Vite 7\nReact Router v7\nZustand\nTailwind CSS v4' },
-            { icon: '🟢', title: 'Backend', body: 'Node.js + Express ESM\nbetter-sqlite3 (sync)\npdf-lib + qrcode\nREST API JSON' },
-            { icon: '🗃️', title: 'Stockage', body: 'SQLite (fichier local)\nVidéos : stockage objet\n(S3 / Cloudflare R2)\nPDF générés à la volée' },
+            { icon: '⚛️', title: t('tech.frontend'), body: 'React 19 + Vite 7\nReact Router v7\nZustand\nTailwind CSS v4' },
+            { icon: '🟢', title: t('tech.backend'), body: 'Node.js + Express ESM\nbetter-sqlite3 (sync)\npdf-lib + qrcode\nREST API JSON' },
+            { icon: '🗃️', title: t('tech.storage'), body: 'SQLite (fichier local)\nVidéos : stockage objet\n(S3 / Cloudflare R2)\nPDF générés à la volée' },
           ].map(({ icon, title, body }) => (
             <div key={title} className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
               <span className="text-2xl mb-3 block">{icon}</span>
@@ -69,10 +72,10 @@ npm run dev           # client :5173  •  serveur :3001`}</CodeBlock>
       </Section>
 
       {/* API */}
-      <Section tag="API REST" title="Endpoints">
+      <Section tag={t('tech.api_tag')} title={t('tech.api_title')}>
         <div className="rounded-2xl border border-slate-100 overflow-hidden mb-6">
           <div className="bg-slate-50 px-5 py-3 border-b border-slate-100">
-            <span className="text-xs font-semibold text-slate-500 font-mono">Base URL : http://localhost:3001</span>
+            <span className="text-xs font-semibold text-slate-500 font-mono">{t('tech.api_base')} http://localhost:3001</span>
           </div>
           <div className="px-5 divide-y divide-slate-50">
             <Endpoint method="GET"   path="/api/brands"               description="Liste toutes les enseignes disponibles" />
@@ -98,18 +101,18 @@ npm run dev           # client :5173  •  serveur :3001`}</CodeBlock>
       </Section>
 
       {/* Video integration */}
-      <Section tag="Message vidéo" title="Architecture d'intégration vidéo">
+      <Section tag={t('tech.video_tag')} title={t('tech.video_title')}>
         <p className="text-slate-500 leading-relaxed mb-6">
-          Le message vidéo est enregistré côté client via l'API <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">MediaRecorder</code>,
+          {t('tech.video_intro')} l'API <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">MediaRecorder</code>,
           puis uploadé sur un stockage objet. L'URL est associée à la commande et encodée dans le QR code du voucher PDF.
         </p>
 
         <div className="flex flex-col gap-3 mb-6">
           {[
-            { step: '1', title: 'Enregistrement', desc: 'MediaRecorder capture le flux caméra/micro en WebM/H.264 directement dans le navigateur.' },
-            { step: '2', title: 'Upload', desc: 'Le blob vidéo est uploadé via une signed URL vers S3 ou Cloudflare R2. Aucune donnée ne transite par le serveur applicatif.' },
-            { step: '3', title: 'Association', desc: "L'identifiant vidéo (video_id) est stocké sur la commande via PATCH /api/orders/:id." },
-            { step: '4', title: 'QR code', desc: 'Le PDF embarque un QR code pointant vers /voucher/:orderId/video, qui streame la vidéo depuis le CDN.' },
+            { step: '1', title: t('tech.step_record'), desc: 'MediaRecorder capture le flux caméra/micro en WebM/H.264 directement dans le navigateur.' },
+            { step: '2', title: t('tech.step_upload'), desc: 'Le blob vidéo est uploadé via une signed URL vers S3 ou Cloudflare R2. Aucune donnée ne transite par le serveur applicatif.' },
+            { step: '3', title: t('tech.step_assoc'), desc: "L'identifiant vidéo (video_id) est stocké sur la commande via PATCH /api/orders/:id." },
+            { step: '4', title: t('tech.step_qr'), desc: 'Le PDF embarque un QR code pointant vers /voucher/:orderId/video, qui streame la vidéo depuis le CDN.' },
           ].map(({ step, title, desc }) => (
             <div key={step} className="flex gap-4 p-4 rounded-xl border border-slate-100">
               <div className="w-7 h-7 rounded-full bg-violet-100 text-violet-700 font-bold text-xs flex items-center justify-center flex-shrink-0">
@@ -141,7 +144,7 @@ setTimeout(() => recorder.stop(), 30_000); // max 30s`}</CodeBlock>
       </Section>
 
       {/* Schema */}
-      <Section tag="Base de données" title="Schéma SQLite">
+      <Section tag={t('tech.db_tag')} title={t('tech.db_title')}>
         <CodeBlock>{`CREATE TABLE brands (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   name        TEXT NOT NULL UNIQUE,
@@ -167,7 +170,7 @@ CREATE TABLE orders (
       </Section>
 
       {/* Env */}
-      <Section tag="Configuration" title="Variables d'environnement">
+      <Section tag={t('tech.config_tag')} title={t('tech.config_title')}>
         <CodeBlock>{`# server/.env
 PORT=3001
 BASE_URL=http://localhost:3001   # URL publique pour les QR codes

@@ -1,24 +1,27 @@
+import { useTranslation } from 'react-i18next';
+
 export default function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       {/* Hero */}
       <div className="mb-14">
-        <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-4">Qui sommes nous</span>
+        <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-4">{t('about.tag')}</span>
         <h1 className="text-4xl font-bold text-slate-900 leading-tight mb-5">
-          La carte cadeau repensée pour l'ère&nbsp;vidéo
+          {t('about.title')}
         </h1>
         <p className="text-lg text-slate-500 leading-relaxed">
-          4you est une plateforme de cartes cadeaux digitales qui place l'émotion au cœur de l'expérience.
-          Nous croyons qu'un cadeau ne se résume pas à un montant — c'est un message, une intention, un moment partagé.
+          {t('about.intro')}
         </p>
       </div>
 
       {/* Values */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
         {[
-          { icon: '🎁', title: 'Le cadeau réinventé', body: 'Des cartes cadeaux pour les enseignes que vous aimez, enrichies d\'un message vidéo personnel.' },
-          { icon: '🎥', title: 'L\'émotion en plus', body: 'Un QR code unique sur chaque voucher donne accès au message vidéo enregistré par l\'offrant.' },
-          { icon: '⚡', title: 'Simple & immédiat', body: 'Commande en moins de 3 minutes, voucher PDF généré instantanément, zéro friction.' },
+          { icon: '🎁', title: t('about.value1_title'), body: t('about.value1_body') },
+          { icon: '🎥', title: t('about.value2_title'), body: t('about.value2_body') },
+          { icon: '⚡', title: t('about.value3_title'), body: t('about.value3_body') },
         ].map(({ icon, title, body }) => (
           <div key={title} className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
             <span className="text-3xl mb-4 block">{icon}</span>
@@ -30,24 +33,22 @@ export default function AboutPage() {
 
       {/* Story */}
       <div className="border-l-4 border-violet-200 pl-6 mb-16">
-        <h2 className="text-xl font-bold text-slate-800 mb-4">Notre histoire</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-4">{t('about.story_title')}</h2>
         <p className="text-slate-500 leading-relaxed mb-3">
-          Né d'un constat simple : les cartes cadeaux digitales existantes sont fonctionnelles, mais froides.
-          Un code à 16 chiffres dans un email, c'est pratique — mais c'est loin d'un vrai cadeau.
+          {t('about.story_1')}
         </p>
         <p className="text-slate-500 leading-relaxed">
-          4you change ça en ajoutant une couche d'humanité : un message vidéo court, enregistré en quelques secondes,
-          accessible via QR code au moment où le destinataire découvre son cadeau. Ce petit détail change tout.
+          {t('about.story_2')}
         </p>
       </div>
 
       {/* Team */}
       <div>
-        <h2 className="text-xl font-bold text-slate-800 mb-6">L'équipe</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-6">{t('about.team_title')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { initials: 'OA', name: 'Olivier Adler', role: 'Fondateur & CEO', color: '#7c3aed' },
-            { initials: 'PD', name: 'Produit & Design', role: 'UX / Design système', color: '#0ea5e9' },
+            { initials: 'OA', name: 'Olivier Adler', role: t('about.role_ceo'), color: '#7c3aed' },
+            { initials: 'PD', name: 'Produit & Design', role: t('about.role_design'), color: '#0ea5e9' },
           ].map(({ initials, name, role, color }) => (
             <div key={name} className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100">
               <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"

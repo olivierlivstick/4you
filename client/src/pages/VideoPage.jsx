@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 export default function VideoPage() {
+  const { t } = useTranslation();
   const { orderId } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,9 +32,9 @@ export default function VideoPage() {
   if (error || !data) {
     return (
       <div className="max-w-md mx-auto px-4 py-16 text-center">
-        <p className="text-red-500 font-medium bg-red-50 p-4 rounded-2xl">{error || 'Commande introuvable'}</p>
+        <p className="text-red-500 font-medium bg-red-50 p-4 rounded-2xl">{error || t('video.not_found')}</p>
         <Link to="/" className="mt-6 inline-block text-primary-600 font-bold hover:underline transition-all">
-          Retour à l'accueil
+          {t('video.back_home')}
         </Link>
       </div>
     );
@@ -68,9 +70,9 @@ export default function VideoPage() {
 
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight leading-tight">
-            Surprise pour <span style={{ color: data.brandColor }}>{data.recipientName}</span> !
+            {t('video.surprise_for', { name: data.recipientName })}
           </h1>
-          <p className="text-slate-500 font-medium text-lg">Carte cadeau exclusive · <span className="text-slate-700 font-bold px-2 py-1 bg-white rounded-lg border border-slate-200/60 shadow-sm ml-1">{data.giftCode}</span></p>
+          <p className="text-slate-500 font-medium text-lg">{t('video.exclusive_card')} · <span className="text-slate-700 font-bold px-2 py-1 bg-white rounded-lg border border-slate-200/60 shadow-sm ml-1">{data.giftCode}</span></p>
         </div>
 
         {data.hasVideoMessage ? (
@@ -114,7 +116,7 @@ export default function VideoPage() {
               <div className="absolute top-6 left-6 z-10">
                 <div className="bg-black/50 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2.5 border border-white/10 shadow-lg">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse" />
-                  <span className="text-white text-xs md:text-sm font-semibold tracking-wide">Message exclusif</span>
+                  <span className="text-white text-xs md:text-sm font-semibold tracking-wide">{t('video.exclusive_message')}</span>
                 </div>
               </div>
 
@@ -135,8 +137,8 @@ export default function VideoPage() {
                   </svg>
                 </button>
                 <div className="hidden sm:block">
-                  <p className="text-sm font-bold text-slate-800">Un mot spécial vous attend</p>
-                  <p className="text-xs text-slate-500 mt-0.5 font-medium">Appuyez sur play pour découvrir</p>
+                  <p className="text-sm font-bold text-slate-800">{t('video.special_word')}</p>
+                  <p className="text-xs text-slate-500 mt-0.5 font-medium">{t('video.press_play')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -160,9 +162,9 @@ export default function VideoPage() {
             <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 flex items-center justify-center mx-auto mb-6 shadow-sm rotate-3">
               <span className="text-5xl drop-shadow-md">🎁</span>
             </div>
-            <h3 className="text-2xl font-black text-slate-800 mb-3 tracking-tight">Un cadeau pour vous !</h3>
+            <h3 className="text-2xl font-black text-slate-800 mb-3 tracking-tight">{t('video.no_video_title')}</h3>
             <p className="text-slate-500 leading-relaxed max-w-sm mx-auto font-medium">
-              L'expéditeur n'a pas ajouté de message vidéo, mais la surprise reste entière. Profitez bien de votre carte cadeau de {data.brandName}.
+              {t('video.no_video_desc', { brand: data.brandName })}
             </p>
           </motion.div>
         )}
@@ -176,17 +178,17 @@ export default function VideoPage() {
             style={{ backgroundColor: `${data.brandColor}15`, color: data.brandColor }}
           >
             <span className="text-lg">🛍️</span>
-            <span>Prête à être utilisée lors de votre prochain achat</span>
+            <span>{t('video.ready_to_use')}</span>
           </div>
 
           <div className="w-12 h-px bg-slate-200" />
 
           <div className="text-center">
             <p className="text-xs text-slate-400 font-medium mb-3">
-              Fonctionnalité vidéo en démonstration technique.<br />
+              {t('video.demo_notice')}<br />
             </p>
             <Link to="/" className="inline-block text-sm font-bold tracking-wide text-primary-500 hover:text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-2xl transition-all">
-              Offrir une carte cadeau à mon tour
+              {t('video.offer_in_turn')}
             </Link>
           </div>
         </motion.div>

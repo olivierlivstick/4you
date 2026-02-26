@@ -30,6 +30,18 @@ export function initSchema() {
   } catch (_) { /* column already exists */ }
 
   try {
+    db.exec(`ALTER TABLE orders ADD COLUMN sender_name TEXT DEFAULT ''`);
+  } catch (_) { /* column already exists */ }
+
+  try {
+    db.exec(`ALTER TABLE orders ADD COLUMN sender_lastname TEXT DEFAULT ''`);
+  } catch (_) { /* column already exists */ }
+
+  try {
+    db.exec(`ALTER TABLE orders ADD COLUMN recipient_lastname TEXT DEFAULT ''`);
+  } catch (_) { /* column already exists */ }
+
+  try {
     db.exec(`ALTER TABLE brands ADD COLUMN photo TEXT DEFAULT ''`);
   } catch (_) { /* column already exists */ }
 

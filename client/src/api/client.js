@@ -43,6 +43,13 @@ export const updateBrand = (id, body) =>
 export const deleteBrand = (id) =>
   fetch(`${BASE}/api/brands/${id}`, { method: 'DELETE' }).then(handleResponse);
 
+// ── Admin test logs ────────────────────────────────────────
+export const getTestLogs = () =>
+  fetch(`${BASE}/api/admin/test-logs`).then(handleResponse);
+
+export const deleteTestLog = (id) =>
+  fetch(`${BASE}/api/admin/test-logs/${id}`, { method: 'DELETE' }).then(handleResponse);
+
 export const uploadImage = (file) => {
   const formData = new FormData();
   formData.append('image', file);

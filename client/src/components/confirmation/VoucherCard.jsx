@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { formatAmount, formatDate } from '../../utils/formatters';
 
 export default function VoucherCard({ order }) {
+  const { t } = useTranslation();
   const brandColor = order.brand_color;
   const videoUrl = `/voucher/${order.id}/video`;
 
@@ -20,7 +22,7 @@ export default function VoucherCard({ order }) {
         <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full opacity-10 bg-white blur-md" />
 
         <div className="relative z-10">
-          <span className="text-white/80 text-xs font-bold tracking-[0.2em] uppercase drop-shadow-sm">Carte Cadeau</span>
+          <span className="text-white/80 text-xs font-bold tracking-[0.2em] uppercase drop-shadow-sm">{t('voucher.card_label')}</span>
           <h2 className="text-white font-black text-4xl mt-2 tracking-tight drop-shadow-md">{order.brand_name}</h2>
           <span
             className="inline-block mt-4 text-xs font-bold tracking-wider uppercase px-4 py-1.5 rounded-full backdrop-blur-md shadow-sm border border-white/20"
@@ -36,7 +38,7 @@ export default function VoucherCard({ order }) {
         {/* Amount */}
         <div className="mb-8 text-center bg-slate-50 py-4 rounded-2xl border border-slate-100/50 shadow-sm relative overflow-hidden">
           <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full opacity-10" style={{ backgroundColor: brandColor }} />
-          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Montant</p>
+          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">{t('voucher.amount_label')}</p>
           <p className="text-5xl font-black tracking-tight" style={{ color: brandColor }}>
             {formatAmount(order.amount)}
           </p>
@@ -44,7 +46,7 @@ export default function VoucherCard({ order }) {
 
         {/* Recipient */}
         <div className="mb-6 flex flex-col items-center text-center">
-          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Offert à</p>
+          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">{t('voucher.offered_to')}</p>
           <p className="text-xl font-extrabold text-slate-800">{order.recipient_name}</p>
         </div>
 
@@ -59,7 +61,7 @@ export default function VoucherCard({ order }) {
 
         {/* Gift code */}
         <div className="mb-8">
-          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-2 text-center">Code d'utilisation</p>
+          <p className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-2 text-center">{t('voucher.code_label')}</p>
           <div
             className="px-4 py-3.5 rounded-2xl text-center shadow-sm"
             style={{ backgroundColor: brandColor + '0d', border: `1px solid ${brandColor}30` }}
@@ -73,10 +75,10 @@ export default function VoucherCard({ order }) {
         {/* Action / Video or Instructions */}
         {order.has_video_message === 1 ? (
           <div className="mb-2 bg-gradient-to-b from-slate-50 to-white p-5 rounded-2xl border border-slate-100 text-center flex flex-col items-center shadow-sm">
-            <p className="text-xs text-slate-500 uppercase font-bold tracking-widest mb-3">Surprise Vidéo ! 🎉</p>
+            <p className="text-xs text-slate-500 uppercase font-bold tracking-widest mb-3">{t('voucher.video_section')}</p>
             <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="block relative group transition-transform hover:scale-105 mb-3">
               <div className="absolute inset-0 bg-white/60 backdrop-blur-sm rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="font-bold text-sm bg-white/90 px-3 py-1.5 rounded-lg shadow-sm" style={{ color: brandColor }}>Voir la vidéo</span>
+                <span className="font-bold text-sm bg-white/90 px-3 py-1.5 rounded-lg shadow-sm" style={{ color: brandColor }}>{t('voucher.video_cta')}</span>
               </div>
               <img
                 src={`/api/qr?url=${encodeURIComponent(window.location.origin + videoUrl)}`}
@@ -95,11 +97,11 @@ export default function VoucherCard({ order }) {
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                 </svg>
-                <span className="text-xs text-slate-400 text-center px-2 font-medium">Lien vidéo</span>
+                <span className="text-xs text-slate-400 text-center px-2 font-medium">{t('voucher.video_link')}</span>
               </div>
             </a>
             <p className="text-xs text-slate-500 font-medium max-w-[200px] leading-relaxed">
-              Scannez ce code ou cliquez dessus pour découvrir votre message.
+              {t('voucher.video_scan_hint')}
             </p>
           </div>
         ) : (
@@ -108,7 +110,7 @@ export default function VoucherCard({ order }) {
               <span className="text-2xl drop-shadow-sm">🛍️</span>
             </div>
             <p className="text-xs text-slate-500 font-medium max-w-[220px] leading-relaxed">
-              Présentez cette carte dématérialisée lors de votre passage en caisse.
+              {t('voucher.no_video_hint')}
             </p>
           </div>
         )}

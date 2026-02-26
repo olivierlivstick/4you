@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useOrderStore } from '../store/orderStore';
 import { getOrder } from '../api/client';
 import VoucherCard from '../components/confirmation/VoucherCard';
 import { motion } from 'framer-motion';
 
 export default function ConfirmationPage() {
+  const { t } = useTranslation();
   const { orderId } = useParams();
   const paidOrder = useOrderStore((s) => s.paidOrder);
   const reset = useOrderStore((s) => s.reset);
@@ -33,15 +35,17 @@ export default function ConfirmationPage() {
   if (error || !order) {
     return (
       <div className="max-w-md mx-auto px-4 py-16 text-center">
-        <p className="text-red-500 font-medium bg-red-50 p-4 rounded-2xl">{error || 'Commande introuvable'}</p>
+        <p className="text-red-500 font-medium bg-red-50 p-4 rounded-2xl">{error || t('confirmation.not_found')}</p>
         <Link to="/" className="mt-6 inline-block text-primary-600 font-bold hover:underline transition-all">
-          Retour à l'accueil
+          {t('confirmation.back_home')}
         </Link>
       </div>
     );
   }
 
   const pdfUrl = `/api/orders/${orderId}/voucher-pdf`;
+  const formatAmount = (amount) =>
+    new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(amount);
 
   return (
     <div className="min-h-[85vh] flex flex-col justify-center py-12 relative overflow-hidden">
@@ -71,18 +75,20 @@ export default function ConfirmationPage() {
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="text-4xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight"
           >
-            Cadeau envoyé !
+            {t('confirmation.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
             className="text-slate-500 text-lg leading-relaxed max-w-md"
-          >
-            Votre carte cadeau <strong className="text-slate-800 font-bold">{order.brand_name}</strong> de{' '}
-            <strong className="text-slate-800 font-bold">
-              {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(order.amount)}
-            </strong>{' '}
-            est prête pour <strong style={{ color: order.brand_color }}>{order.recipient_name}</strong>.
-          </motion.p>
+            dangerouslySetInnerHTML={{
+              __html: t('confirmation.subtitle', {
+                brand: order.brand_name,
+                amount: formatAmount(order.amount),
+                name: order.recipient_name,
+                brandColor: order.brand_color,
+              })
+            }}
+          />
         </div>
 
         {/* Voucher */}
@@ -109,14 +115,14 @@ export default function ConfirmationPage() {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            Télécharger en PDF
+            {t('confirmation.download_pdf')}
           </a>
           <Link
             to="/"
             onClick={reset}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl font-bold border-2 border-slate-200/60 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all hover:-translate-y-1 active:scale-95"
           >
-            Offrir une autre carte
+            {t('confirmation.offer_another')}
           </Link>
         </motion.div>
 
@@ -124,7 +130,7 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
           className="text-center text-xs text-slate-400 mt-8 font-medium"
         >
-          Site de démonstration — aucun paiement réel n'a été effectué
+          {t('confirmation.demo_notice')}
         </motion.p>
       </motion.div>
     </div>
