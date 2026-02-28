@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" aggiornata",
       "toast_deleted_brand": "\"{{name}}\" eliminata"
     }
-  }
+  },
+  "demo_banner": "Questo è un sito di dimostrazione. Non propone vere carte regalo, ma ha lo scopo di presentare l'offerta Livstick e mostrarla in contesto, così come potrebbe essere utilizzata da altri siti che vendono effettivamente carte regalo."
 }

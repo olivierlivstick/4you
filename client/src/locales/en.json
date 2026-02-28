@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" updated",
       "toast_deleted_brand": "\"{{name}}\" deleted"
     }
-  }
+  },
+  "demo_banner": "This is a demonstration website. It does not offer real gift cards, but aims to showcase the Livstick offering and demonstrate how it could be used by other websites that actually sell gift cards."
 }

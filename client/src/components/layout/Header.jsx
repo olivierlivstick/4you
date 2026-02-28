@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Logo from '../ui/Logo';
 
 const LANGUAGES = [
+  { code: 'de', label: 'DE' },
   { code: 'en', label: 'EN' },
+  { code: 'es', label: 'ES' },
   { code: 'fr', label: 'FR' },
   { code: 'it', label: 'IT' },
-  { code: 'es', label: 'ES' },
-  { code: 'pt', label: 'PT' },
-  { code: 'de', label: 'DE' },
   { code: 'pl', label: 'PL' },
+  { code: 'pt', label: 'PT' },
 ];
 
 function LanguageSelector() {
@@ -67,7 +67,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full glass">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+      <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <NavLink to="/" className="no-underline transition-transform hover:scale-105 active:scale-95">
           <Logo />
         </NavLink>

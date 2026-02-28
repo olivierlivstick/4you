@@ -450,7 +450,7 @@ export default function BackOfficePage() {
       <Toast toast={toast} />
 
       {/* Page header */}
-      <div className="flex items-center justify-between mb-8 px-6 py-5 rounded-3xl bg-white shadow-sm border border-slate-100 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-8 px-6 py-5 rounded-3xl bg-white shadow-sm border border-slate-100 max-w-screen-2xl mx-auto">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm"
             style={{ background: 'linear-gradient(135deg, #6C3AED, #EC4899)' }}>
@@ -475,7 +475,7 @@ export default function BackOfficePage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         {/* Tabs */}
         <div className="flex gap-2 mb-6">
           {[

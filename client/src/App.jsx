@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
+import DemoBanner from './components/layout/DemoBanner';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import PersonalizePage from './pages/PersonalizePage';
@@ -14,6 +15,7 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Header />
+        <DemoBanner />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />

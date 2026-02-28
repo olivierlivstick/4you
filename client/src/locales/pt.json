@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" atualizada",
       "toast_deleted_brand": "\"{{name}}\" eliminada"
     }
-  }
+  },
+  "demo_banner": "Este é um site de demonstração. Não oferece cartões-presente reais, mas tem como objetivo apresentar a oferta Livstick e mostrá-la em situação, tal como poderia ser utilizada por outros sites que vendem cartões-presente de verdade."
 }

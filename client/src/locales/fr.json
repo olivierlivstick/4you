@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" mise à jour",
       "toast_deleted_brand": "\"{{name}}\" supprimée"
     }
-  }
+  },
+  "demo_banner": "Ce site est un site de démonstration. Il ne propose pas de vraies cartes cadeau mais a pour objectif de présenter l'offre Livstick et de la montrer en situation, telle qu'elle pourrait être utilisée par d'autres sites proposant réellement des cartes cadeaux à la vente."
 }

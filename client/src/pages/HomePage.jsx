@@ -51,7 +51,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 pt-16 pb-24 sm:pt-24 sm:pb-32">
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 pt-6 pb-24 sm:pt-10 sm:pb-32">
         {/* Decorative Orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
@@ -74,7 +74,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 lg:text-left text-center">
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 lg:text-left text-center">
           <div className="flex-1 flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -127,7 +127,7 @@ export default function HomePage() {
             className="flex-1 w-full max-w-md lg:max-w-none relative mt-8 lg:mt-0"
           >
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[10px] border-white/60 glass hover:rotate-2 transition-transform duration-500">
-              <img src="/images/hero_lifestyle.png" alt={t('home.hero_alt')} className="w-full h-auto object-cover aspect-[4/5]" />
+              <img src="/images/hero_lifestyle.png" alt={t('home.hero_alt')} className="w-full h-auto object-cover aspect-[4/3]" />
 
               {/* Floating badge */}
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/50 flex items-center gap-4 hover:scale-105 transition-transform cursor-pointer">
@@ -143,7 +143,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Feature strip ──────────────────────────────────── */}
-      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-10 md:-mt-10 mb-10">
+      <section className="relative z-20 max-w-screen-2xl mx-auto px-4 sm:px-6 w-full mt-10 md:-mt-10 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((f, i) => (
             <motion.div
@@ -171,7 +171,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Brand grid ─────────────────────────────────────── */}
-      <section id="brands" className="w-full px-4 sm:px-8 py-24 max-w-7xl mx-auto">
+      <section id="brands" className="w-full px-4 sm:px-6 py-24 max-w-screen-2xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">
             {t('home.catalog_title')}
@@ -182,7 +182,7 @@ export default function HomePage() {
         </div>
 
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 sm:gap-8">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="bg-white rounded-3xl overflow-hidden animate-pulse shadow-sm border border-slate-100">
                 <div className="h-44 bg-slate-100" />
@@ -209,13 +209,13 @@ export default function HomePage() {
         )}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 sm:gap-8">
             {brands.map((brand, i) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: (i % 4) * 0.1 }}
+                transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
                 key={brand.id}
                 className="h-full flex"
               >

@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" zaktualizowana",
       "toast_deleted_brand": "\"{{name}}\" usunięta"
     }
-  }
+  },
+  "demo_banner": "To jest strona demonstracyjna. Nie oferuje prawdziwych kart podarunkowych, lecz ma na celu przedstawienie oferty Livstick i pokazanie jej w działaniu, tak jak mogłaby być używana przez inne strony sprzedające karty podarunkowe."
 }

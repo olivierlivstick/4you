@@ -11,8 +11,8 @@ function CodeBlock({ children }) {
 function Section({ tag, title, children }) {
   return (
     <section className="mb-14">
-      {tag && <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-3">{tag}</span>}
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">{title}</h2>
+      {tag && <span className="inline-block text-sm font-semibold tracking-widest text-violet-500 uppercase mb-3">{tag}</span>}
+      <h2 className="text-3xl font-bold text-slate-800 mb-6">{title}</h2>
       {children}
     </section>
   );
@@ -28,7 +28,7 @@ function Endpoint({ method, path, description }) {
     <div className="flex items-start gap-3 py-3 border-b border-slate-100 last:border-0">
       <span className={`px-2 py-0.5 rounded text-xs font-bold font-mono flex-shrink-0 mt-0.5 ${colors[method]}`}>{method}</span>
       <span className="font-mono text-sm text-slate-700 flex-shrink-0">{path}</span>
-      <span className="text-sm text-slate-400">{description}</span>
+      <span className="text-base text-slate-400">{description}</span>
     </div>
   );
 }
@@ -37,14 +37,14 @@ export default function TechPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-16">
       {/* Hero */}
       <div className="mb-14">
-        <span className="inline-block text-xs font-semibold tracking-widest text-violet-500 uppercase mb-4">{t('tech.tag')}</span>
+        <span className="inline-block text-sm font-semibold tracking-widest text-violet-500 uppercase mb-4">{t('tech.tag')}</span>
         <h1 className="text-4xl font-bold text-slate-900 leading-tight mb-5">
           {t('tech.title')}
         </h1>
-        <p className="text-lg text-slate-500 leading-relaxed">
+        <p className="text-xl text-slate-600 leading-relaxed">
           {t('tech.intro')}
         </p>
       </div>
@@ -59,8 +59,8 @@ export default function TechPage() {
           ].map(({ icon, title, body }) => (
             <div key={title} className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
               <span className="text-2xl mb-3 block">{icon}</span>
-              <h3 className="font-semibold text-slate-800 text-sm mb-2">{title}</h3>
-              <p className="text-xs text-slate-500 leading-relaxed whitespace-pre-line">{body}</p>
+              <h3 className="font-semibold text-slate-800 text-base mb-2">{title}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed whitespace-pre-line">{body}</p>
             </div>
           ))}
         </div>
@@ -88,7 +88,7 @@ npm run dev           # client :5173  •  serveur :3001`}</CodeBlock>
           </div>
         </div>
 
-        <h3 className="font-semibold text-slate-700 mb-3">POST /api/orders — Corps de la requête</h3>
+        <h3 className="font-semibold text-base text-slate-700 mb-3">POST /api/orders — Corps de la requête</h3>
         <CodeBlock>{`{
   "brand_id":        1,                      // integer — requis
   "amount":          50,                     // float, 5–500 — requis
@@ -102,7 +102,7 @@ npm run dev           # client :5173  •  serveur :3001`}</CodeBlock>
 
       {/* Video integration */}
       <Section tag={t('tech.video_tag')} title={t('tech.video_title')}>
-        <p className="text-slate-500 leading-relaxed mb-6">
+        <p className="text-base text-slate-500 leading-relaxed mb-6">
           {t('tech.video_intro')} l'API <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">MediaRecorder</code>,
           puis uploadé sur un stockage objet. L'URL est associée à la commande et encodée dans le QR code du voucher PDF.
         </p>
@@ -119,8 +119,8 @@ npm run dev           # client :5173  •  serveur :3001`}</CodeBlock>
                 {step}
               </div>
               <div>
-                <p className="font-semibold text-slate-800 text-sm mb-0.5">{title}</p>
-                <p className="text-sm text-slate-500">{desc}</p>
+                <p className="font-semibold text-slate-800 text-base mb-0.5">{title}</p>
+                <p className="text-base text-slate-500">{desc}</p>
               </div>
             </div>
           ))}

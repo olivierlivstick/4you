@@ -99,14 +99,14 @@ export default function PersonalizePage() {
   const [step1Done, setStep1Done] = useState(null);
 
   // Step 0 — commande
-  const [selectedPreset, setSelectedPreset] = useState(PRESETS.includes(store.amount) ? store.amount : null);
+  const [selectedPreset, setSelectedPreset] = useState(PRESETS.includes(store.amount) ? store.amount : 50);
   const [customAmount, setCustomAmount] = useState(store.amount && !PRESETS.includes(store.amount) ? String(store.amount) : '');
-  const [senderName, setSenderName] = useState('');
-  const [senderLastName, setSenderLastName] = useState('');
-  const [senderEmail, setSenderEmail] = useState(store.senderEmail || '');
-  const [recipientName, setRecipientName] = useState(store.recipientName || '');
-  const [recipientLastName, setRecipientLastName] = useState('');
-  const [recipientEmail, setRecipientEmail] = useState(store.recipientEmail || '');
+  const [senderName, setSenderName] = useState('Alice');
+  const [senderLastName, setSenderLastName] = useState('Martin');
+  const [senderEmail, setSenderEmail] = useState(store.senderEmail || 'alice.martin@exemple.fr');
+  const [recipientName, setRecipientName] = useState(store.recipientName || 'Bob');
+  const [recipientLastName, setRecipientLastName] = useState('Dupont');
+  const [recipientEmail, setRecipientEmail] = useState(store.recipientEmail || 'bob.dupont@exemple.fr');
   const [personalMessage, setPersonalMessage] = useState(store.personalMessage || '');
   const [step0Errors, setStep0Errors] = useState({});
 

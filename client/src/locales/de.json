@@ -249,5 +249,6 @@
       "toast_updated": "\"{{name}}\" aktualisiert",
       "toast_deleted_brand": "\"{{name}}\" gelöscht"
     }
-  }
+  },
+  "demo_banner": "Dies ist eine Demonstrations-Website. Sie bietet keine echten Geschenkkarten an, sondern hat das Ziel, das Livstick-Angebot vorzustellen und zu zeigen, wie es von anderen Websites genutzt werden könnte, die tatsächlich Geschenkkarten verkaufen."
 }
