@@ -37,6 +37,7 @@
     "parcours_label": "Choisir un parcours",
     "parcours_pre": "Enregistrement pré-paiement",
     "parcours_post": "Enregistrement post-paiement",
+    "parcours_info": "Selon votre configuration, vous pouvez proposer à vos clients l'enregistrement de leur message vidéo avant ou après le paiement de leur commande.",
     "step0": {
       "title": "Votre commande",
       "amount_custom_label": "Ou saisir un montant libre",

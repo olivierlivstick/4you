@@ -37,6 +37,7 @@
     "parcours_label": "Wybierz ścieżkę",
     "parcours_pre": "Nagranie przed płatnością",
     "parcours_post": "Nagranie po płatności",
+    "parcours_info": "W zależności od konfiguracji możesz zaoferować klientom możliwość nagrania wiadomości wideo przed lub po dokonaniu płatności.",
     "step0": {
       "title": "Twoje zamówienie",
       "amount_custom_label": "Lub wprowadź dowolną kwotę",

@@ -37,6 +37,7 @@
     "parcours_label": "Elige un recorrido",
     "parcours_pre": "Grabación pre-pago",
     "parcours_post": "Grabación post-pago",
+    "parcours_info": "Según su configuración, puede ofrecer a sus clientes la opción de grabar su mensaje de vídeo antes o después del pago.",
     "step0": {
       "title": "Tu pedido",
       "amount_custom_label": "O introduce un importe libre",

@@ -37,6 +37,7 @@
     "parcours_label": "Choose a journey",
     "parcours_pre": "Pre-payment recording",
     "parcours_post": "Post-payment recording",
+    "parcours_info": "Depending on your configuration, you can offer your customers the option to record their video message before or after payment.",
     "step0": {
       "title": "Your order",
       "amount_custom_label": "Or enter a free amount",

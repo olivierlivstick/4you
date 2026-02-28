@@ -37,6 +37,7 @@
     "parcours_label": "Einen Ablauf wählen",
     "parcours_pre": "Aufnahme vor Zahlung",
     "parcours_post": "Aufnahme nach Zahlung",
+    "parcours_info": "Je nach Ihrer Konfiguration können Sie Ihren Kunden anbieten, ihre Videonachricht vor oder nach der Zahlung aufzunehmen.",
     "step0": {
       "title": "Ihre Bestellung",
       "amount_custom_label": "Oder einen freien Betrag eingeben",

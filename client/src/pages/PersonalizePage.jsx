@@ -283,21 +283,29 @@ export default function PersonalizePage() {
         {/* Sélecteur de parcours — boutons côte à côte */}
         <div className="flex flex-col gap-1.5">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-1">{t('personalize.parcours_label')}</p>
-          <div className="flex gap-3">
-            {[
-              { key: 'pre', label: t('personalize.parcours_pre') },
-              { key: 'post', label: t('personalize.parcours_post') },
-            ].map(({ key, label }) => (
-              <button key={key} onClick={() => setParcours(key)}
-                className="py-2.5 px-4 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap"
-                style={
-                  parcours === key
-                    ? { background: brand.color, color: 'white', boxShadow: `0 6px 20px ${brand.color}40` }
-                    : { background: 'white', color: '#64748b', border: '1px solid #e2e8f0' }
-                }>
-                {label}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row items-start gap-3">
+            <div className="flex gap-3 flex-shrink-0">
+              {[
+                { key: 'pre', label: t('personalize.parcours_pre') },
+                { key: 'post', label: t('personalize.parcours_post') },
+              ].map(({ key, label }) => (
+                <button key={key} onClick={() => setParcours(key)}
+                  className="py-2.5 px-4 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap"
+                  style={
+                    parcours === key
+                      ? { background: brand.color, color: 'white', boxShadow: `0 6px 20px ${brand.color}40` }
+                      : { background: 'white', color: '#64748b', border: '1px solid #e2e8f0' }
+                  }>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-2.5">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-sm text-amber-800 font-medium leading-snug">{t('personalize.parcours_info')}</p>
+            </div>
           </div>
         </div>
       </div>
