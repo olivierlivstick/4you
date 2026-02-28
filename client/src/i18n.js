@@ -24,9 +24,13 @@ i18n
       pl: { translation: pl },
     },
     fallbackLng: 'en',
+    load: 'languageOnly',
+    supportedLngs: ['de', 'en', 'es', 'fr', 'it', 'pl', 'pt'],
+    nonExplicitSupportedLngs: true,
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLngManual',
     },
     interpolation: {
       escapeValue: false,
